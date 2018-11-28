@@ -1,41 +1,41 @@
 //=============CHOOSE CHARACTER==============//
-let character = 'images/char-boy.png';
-chooseCharacter = function(e){
-    let imgName = e.target.id;
-    character = `images/${imgName}.png`;
-    console.log(character)
-}
-
-
-let menu = document.querySelector('.menu');
-menu.addEventListener('click', chooseCharacter);
-
+// let character = 'images/char-boy.png';
+// chooseCharacter = function (e) {
+//     let imgName = e.target.id;
+//     character = `images/${imgName}.png`;
+//     console.log(character)
+//
+// }
+//
+//
+// let menu = document.querySelector('.menu');
+// menu.addEventListener('click', chooseCharacter);
 
 
 //===============Enemy================//
-
 var Enemy = function (x, y, player) {
     this.sprite = 'images/enemy-bug.png';
-    this.x = x;
+    this.x = x * Math.random();
     this.y = y;
     this.player = player;
     this.speed = 400 * Math.random();
-};
-Enemy.prototype.update = function (dt) {
-    this.x += this.speed * dt;
-    if (this.x > 495) {
-        this.speed = 400 * Math.random();
-        this.x = 0;
-    }
-    this.isCollision();
-};
-Enemy.prototype.isCollision = function () {
-    if (this.y > this.player.y - 80 && this.y < this.player.y + 80 &&
-        this.x > this.player.x - 80 && this.x < this.player.x + 80)
-    {this.player.toStartPoint();}
-};
-Enemy.prototype.render = function () {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    this.update = function (dt) {
+        this.x += this.speed * dt;
+        if (this.x > 495) {
+            this.speed = 400 * Math.random();
+            this.x = 0;
+        }
+        this.isCollision();
+    };
+    this.isCollision = function () {
+        if (this.y > this.player.y - 80 && this.y < this.player.y + 80 &&
+            this.x > this.player.x - 80 && this.x < this.player.x + 80) {
+            this.player.toStartPoint();
+        }
+    };
+    this.render = function () {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    };
 };
 
 //==============PLAYER===============//
@@ -44,7 +44,8 @@ let Player = function () {
     this.x = 200;
     this.y = 420;
     this.sprite = 'images/char-boy.png';
-    this.update = function () {};
+    this.update = function () {
+    };
     this.render = function () {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     };
